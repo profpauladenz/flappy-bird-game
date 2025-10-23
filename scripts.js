@@ -34,13 +34,6 @@ function start() {
 //     message.innerHTML = 'Em jogo!'
 // });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key == "Enter") {
-            state = State.play;
-            message.innerHTML = 'Voa, bruxão!';
-        }
-    });
-
     function resetPosition() {
         bird.style.top = `40vh`;
         bird.style.left = `30vw`;
@@ -96,4 +89,24 @@ function end() {
     lostPosition();
 }
 
+document.addEventListener('keydown', (event) => {
+    if (state == State.start) {
+        if (event.key == "Enter") {
+            state = State.play;
+            message.innerHTML = 'Voa, bruxão!';
+        }
+    } else if (state == State.play) {
+        if (event.key == " ") {
+            doFlap();
+        }
+    } else { // end
+
+    }
+});
+
+function doFlap() {
+    vy+=flap;
+}
+
 start();
+// game();
