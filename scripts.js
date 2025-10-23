@@ -24,10 +24,25 @@ let best = 0; //TODO: Adicionar lógica
 //     message.innerHTML = 'Em jogo!'
 // });
 
-document.addEventListener('keydown', (event) => {
-    if (event.key == "Enter") {
-        state = State.play;
-        console.log("No estado: " + state);
-        message.innerHTML = 'Voa, bruxão!';
+function start() {
+    document.addEventListener('keydown', (event) => {
+        if (event.key == "Enter") {
+            state = State.play;
+            message.innerHTML = 'Voa, bruxão!';
+        }
+    });
+
+    function resetPosition() {
+        bird.style.top = `40vh`;
+        bird.style.left = `30vw`;
     }
-});
+
+    function resetScore() {
+        score = 0;
+    }
+
+    resetPosition();
+    resetScore();
+}
+
+start();
