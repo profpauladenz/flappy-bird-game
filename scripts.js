@@ -1,5 +1,5 @@
 // Estrutura básica de jogo
-// const game = document.querySelector('.game');
+const game = document.querySelector('.game');
 const bird = document.querySelector('.bird');
 const hudScore = document.querySelector('.score');
 const message = document.querySelector('.message');
@@ -21,10 +21,13 @@ let best = 0; //TODO: Adicionar lógica
 // Internal
 let frames = 0;
 
-// Movimento
+// Movimento do pássaro (apenas vertical - Y)
 const gravity = 0.5;
 const flap = -8; 
 let vy = 0;
+
+// Movimento dos pipes (apenas horizontal - X) 
+let vx = -1;
 
 // Função para inicializar a tela de START
 function start() {
@@ -53,8 +56,8 @@ function start() {
 }
 
 // Função para inicializar a tela de JOGO
-function game() {
-    // state = State.play;
+function run() {
+    state = State.play;
 
     function loop() {
         update();
@@ -70,6 +73,12 @@ function game() {
             vy+=gravity;
             const box = bird.getBoundingClientRect();
             const newY = box.top + vy;
+            //TODO: Não deixar o pássaro sair do frame
+            // if (newY > 0) {
+            //     bird.style.top = `0px`
+            // } else {
+            //     bird.style.top = `${newY}px`;
+            // }
             bird.style.top = `${newY}px`;
         }
     }
@@ -108,5 +117,5 @@ function doFlap() {
     vy+=flap;
 }
 
-start();
-// game();
+// start();
+// run();
