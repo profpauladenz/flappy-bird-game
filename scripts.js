@@ -1,5 +1,5 @@
 // Estrutura básica de jogo
-const game = document.querySelector('.game');
+// const game = document.querySelector('.game');
 const bird = document.querySelector('.bird');
 const hudScore = document.querySelector('.score');
 const message = document.querySelector('.message');
@@ -18,13 +18,17 @@ let state = State.start;
 let score = 0;
 let best = 0; //TODO: Adicionar lógica
 
+let frames = 0; //TODO: Verificar se necessita ser reinicializado no START
+
+
+// Função para inicializar a tela de START
+function start() {
 //TODO: Adicionar alternativa de início com botão
 // btnIniciar.addEventListener('click', () => {
 //     state = State.play;
 //     message.innerHTML = 'Em jogo!'
 // });
 
-function start() {
     document.addEventListener('keydown', (event) => {
         if (event.key == "Enter") {
             state = State.play;
@@ -43,6 +47,30 @@ function start() {
 
     resetPosition();
     resetScore();
+}
+
+// Função para inicializar a tela de JOGO
+function game() {
+    // state = State.play;
+
+    function loop() {
+        update();
+        render();
+        requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    function update() {
+        if (state == State.play) {
+            frames++;
+        }
+    }
+
+    function render() {
+        if (state == State.play) {
+            message.innerHTML = 'Loop rodando em ' + frames;
+        }
+    }
 }
 
 start();
