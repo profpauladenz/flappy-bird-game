@@ -18,8 +18,13 @@ let state = State.start;
 let score = 0;
 let best = 0; //TODO: Adicionar lógica
 
-let frames = 0; //TODO: Verificar se necessita ser reinicializado no START
+// Internal
+let frames = 0;
 
+// Movimento
+const gravity = 0.5;
+const flap = -8; 
+let vy = 0;
 
 // Função para inicializar a tela de START
 function start() {
@@ -45,8 +50,13 @@ function start() {
         score = 0;
     }
 
+    function resetFrames() {
+        frames = 0;
+    }
+
     resetPosition();
     resetScore();
+    resetFrames();
 }
 
 // Função para inicializar a tela de JOGO
@@ -63,6 +73,11 @@ function game() {
     function update() {
         if (state == State.play) {
             frames++;
+
+            vy+=gravity;
+            const box = bird.getBoundingClientRect();
+            const newY = box.top + vy;
+            bird.style.top = `${newY}px`;
         }
     }
 
