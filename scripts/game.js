@@ -23,6 +23,16 @@ function run() {
             //     bird.style.top = `${newY}px`;
             // }
             bird.style.top = `${newY}px`;
+
+            document
+                .querySelectorAll('.pipe_sprite')
+                .forEach(pipe => {
+                    const boxPipe = pipe.getBoundingClientRect();
+                    const newX = boxPipe.left + speed;
+                    pipe.style.left = `${newX}px`;
+
+                    //TODO: Eliminar a pipe se estiver fora do game boundaries
+                });
         }
     }
 
@@ -41,12 +51,16 @@ function spawnPipe() {
     const box = document.createElement('div');
     box.className = 'pipe_sprite';
 
-    box.style.left = `100px`;
-    box.style.top = `50px`;
+    box.style.left = `99vw`;
+    box.style.top = `${randomSpawnPoint()}vh`;
 
     const sprite = document.createElement('img');
     sprite.src = "./assets/pipe.png"
     box.appendChild(sprite);
 
     game.appendChild(box);
+}
+
+function randomSpawnPoint() {
+    return Math.floor(Math.random() * 100);
 }

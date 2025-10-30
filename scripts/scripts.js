@@ -27,6 +27,7 @@ const flap = -8;
 let vy = 0;
 
 // Movimento dos pipes (apenas horizontal - X) 
+const speed = -0.5;
 let vx = -1;
 
 document.addEventListener('keydown', (event) => {
@@ -44,6 +45,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-start();
-spawnPipe();
+// start();
 // run();
+spawnPipe();
