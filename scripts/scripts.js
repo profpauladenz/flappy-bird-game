@@ -34,7 +34,7 @@ document.addEventListener('keydown', (event) => {
     if (state == State.start) {
         if (event.key == "Enter") {
             state = State.play;
-            message.innerHTML = 'Voa, bruxão!';
+            run();
         }
     } else if (state == State.play) {
         if (event.key == " ") {
@@ -45,5 +45,4 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// start();
-// run();
+start();
