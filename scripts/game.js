@@ -1,6 +1,7 @@
 // Função para inicializar a tela de JOGO
 function run() {
     state = State.play;
+    message.innerHTML = '';
 
     function loop() {
         update();
@@ -38,7 +39,10 @@ function run() {
 
     function render() {
         if (state == State.play) {
-            message.innerHTML = 'Loop rodando em ' + frames;
+            // Respawn baseado em frames
+            if (frames % 200 == 0) {
+                spawnPipe();
+            }
         }
     }
 }
@@ -51,10 +55,12 @@ function spawnPipe() {
     const box = document.createElement('div');
     box.className = 'pipe_sprite';
 
-    box.style.left = `99vw`;
+    // box.style.left = `99vw`;
+    box.style.left = `50vw`;
     box.style.top = `${randomSpawnPoint()}vh`;
 
     const sprite = document.createElement('img');
+    sprite.style.width = `100px`;
     sprite.src = "./assets/pipe.png"
     box.appendChild(sprite);
 

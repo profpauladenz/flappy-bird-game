@@ -22,8 +22,7 @@ body {
 }
 
 .bird {
-    height: 100px;
-    width: 160px;
+    height: 70px;
     position: fixed;
     top: 40vh;
     left: 30vw;
@@ -32,6 +31,7 @@ body {
 
 .pipe_sprite {
     position: fixed;
+    width: 100px;
     z-index: 50;
 }
 
