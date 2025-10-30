@@ -1,3 +1,6 @@
+
+
+
 // Função para inicializar a tela de JOGO
 function run() {
     state = State.play;
@@ -16,14 +19,20 @@ function run() {
 
             vy+=gravity;
             const box = bird.getBoundingClientRect();
-            const newY = box.top + vy;
-            //TODO: Não deixar o pássaro sair do frame
-            // if (newY > 0) {
-            //     bird.style.top = `0px`
-            // } else {
-            //     bird.style.top = `${newY}px`;
-            // }
-            bird.style.top = `${newY}px`;
+            const topEdge = 0;
+            const lowerEdge = window.innerHeight - box.height;
+
+            let proposal = box.top + vy;
+
+            if (proposal < topEdge) {
+                proposal = topEdge;
+                vy = 0;
+            } else if (proposal > lowerEdge) {
+                proposal = lowerEdge;
+                vy = 0;
+            } 
+            
+            bird.style.top = `${Math.round(proposal + vy)}px`;
 
             document
             .querySelectorAll('.pipe_sprite')
@@ -44,7 +53,7 @@ function run() {
     function render() {
         if (state == State.play) {
             // Respawn baseado em frames
-            if (frames % 200 == 0) {
+            if (frames % 200 === 0) {
                 spawnPipe();
             }
         }
