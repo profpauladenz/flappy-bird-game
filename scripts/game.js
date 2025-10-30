@@ -36,3 +36,17 @@ function run() {
 function doFlap() {
     vy+=flap;
 }
+
+function spawnPipe() {
+    const box = document.createElement('div');
+    box.className = 'pipe_sprite';
+
+    box.style.left = `100px`;
+    box.style.top = `50px`;
+
+    const sprite = document.createElement('img');
+    sprite.src = "./assets/pipe.png"
+    box.appendChild(sprite);
+
+    game.appendChild(box);
+}
