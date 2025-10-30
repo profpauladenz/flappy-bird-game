@@ -47,4 +47,3 @@ document.addEventListener('keydown', (event) => {
 
 // start();
 // run();
-spawnPipe();

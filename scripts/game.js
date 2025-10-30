@@ -26,14 +26,18 @@ function run() {
             bird.style.top = `${newY}px`;
 
             document
-                .querySelectorAll('.pipe_sprite')
-                .forEach(pipe => {
-                    const boxPipe = pipe.getBoundingClientRect();
-                    const newX = boxPipe.left + speed;
-                    pipe.style.left = `${newX}px`;
+            .querySelectorAll('.pipe_sprite')
+            .forEach(pipe => {
+                const boxPipe = pipe.getBoundingClientRect();
+                const newX = boxPipe.left + speed;
 
-                    //TODO: Eliminar a pipe se estiver fora do game boundaries
-                });
+                if (newX < 0) {
+                    pipe.remove();
+                    console.log("removed");
+                } else {
+                    pipe.style.left = `${newX}px`;
+                }
+            });
         }
     }
 
@@ -60,8 +64,8 @@ function spawnPipe() {
     box.style.top = `${randomSpawnPoint()}vh`;
 
     const sprite = document.createElement('img');
-    sprite.style.width = `100px`;
-    sprite.src = "./assets/pipe.png"
+    sprite.className = 'pipe_img';
+    sprite.src = "./assets/pipe.png";
     box.appendChild(sprite);
 
     game.appendChild(box);
