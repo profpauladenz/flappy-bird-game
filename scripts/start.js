@@ -1,25 +1,17 @@
 // Função para inicializar a tela de START
 function start() {
-//TODO: Adicionar alternativa de início com botão
-// btnIniciar.addEventListener('click', () => {
-//     state = State.play;
-//     message.innerHTML = 'Em jogo!'
-// });
+    state = State.start;
 
-    function resetPosition() {
-        bird.style.top = `40vh`;
-        bird.style.left = `30vw`;
-    }
+    document
+    .querySelectorAll('.pipe_sprite, .pipe_img')
+    .forEach(element => element.remove());
 
-    function resetScore() {
-        score = 0;
-    }
+    bird.style.top = `40vh`;
+    bird.style.left = `30vw`;
+    bird.style.transform = `scaleY(1)`;
 
-    function resetFrames() {
-        frames = 0;
-    }
+    score = 0;
+    frames = 0;
 
-    resetPosition();
-    resetScore();
-    resetFrames();
+    message.innerHTML = 'Press Enter To Start Game';
 }
