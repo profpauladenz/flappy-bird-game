@@ -18,35 +18,35 @@ const message = document.querySelector('.message');
 const btnIniciar = document.querySelector('.start');
 
 document.addEventListener('keydown', (event) => {
-    if (state === State.start && event.key === "Enter") {
+    switch (state, event.key) {
+    case State.start && "Enter":
         gameplay();
-    } else if (state === State.gameplay && event.key === " ") {
+        break;
+    case State.gameplay && " ":
         doFlap();
-    } else if (state === State.end) {
+        break;
+    case State.end:
         start();
+        break;
+    default:
+        break;
     }
-
-    // switch (state, event.key) {
-    // case State.start && "Enter":
-    //     gameplay();
-    // case State.gameplay && " ":
-    //     doFlap();
-    // case State.end:
-    //     start();
-    // }
 });
 
-//TODO: Não está funcionando bem
-// document.addEventListener('pointerdown', () => {
-//     switch (state) {
-//     case State.start:
-//         state = State.gameplay;
-//         gameplay();
-//     case State.gameplay:
-//         doFlap();
-//     case State.end:
-//         break;
-//     }
-// });
+document.addEventListener('pointerdown', () => {
+    switch (state) {
+    case State.start:
+        gameplay();
+        break;
+    case State.gameplay:
+        doFlap();
+        break;
+    case State.end:
+        start();
+        break;
+    default:
+        break;
+    }
+});
 
 window.addEventListener('load', () => start());
