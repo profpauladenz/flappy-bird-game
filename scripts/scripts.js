@@ -11,21 +11,29 @@ let frames = 0;
 let vy = 0;
 let vx = -1;
 
-const game = document.querySelector('.game');
+const gameScene = document.querySelector('.gameScene');
 const bird = document.querySelector('.bird');
 const hudScore = document.querySelector('.score');
 const message = document.querySelector('.message');
 const btnIniciar = document.querySelector('.start');
 
 document.addEventListener('keydown', (event) => {
-    switch (state, event.key) {
-    case State.start && "Enter":
+    if (state === State.start && event.key === "Enter") {
         gameplay();
-    case State.gameplay && " ":
+    } else if (state === State.gameplay && event.key === " ") {
         doFlap();
-    case State.end:
-        break;
+    } else if (state === State.end) {
+        start();
     }
+
+    // switch (state, event.key) {
+    // case State.start && "Enter":
+    //     gameplay();
+    // case State.gameplay && " ":
+    //     doFlap();
+    // case State.end:
+    //     start();
+    // }
 });
 
 //TODO: Não está funcionando bem

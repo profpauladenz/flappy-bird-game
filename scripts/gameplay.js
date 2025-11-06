@@ -76,7 +76,7 @@ function spawnPipe() {
     sprite.src = "./assets/pipe.png";
     box.appendChild(sprite);
 
-    game.appendChild(box);
+    gameScene.appendChild(box);
 }
 
 function randomSpawnPoint() {
