@@ -1,9 +1,5 @@
-
-
-
-// Função para inicializar a tela de JOGO
-function run() {
-    state = State.play;
+function gameplay() {
+    state = State.gameplay;
     message.innerHTML = '';
 
     function loop() {
@@ -14,7 +10,7 @@ function run() {
     requestAnimationFrame(loop);
 
     function update() {
-        if (state != State.play) {
+        if (state != State.gameplay) {
             return;
         }
 
@@ -54,7 +50,7 @@ function run() {
     }
 
     function render() {
-        if (state == State.play) {
+        if (state == State.gameplay) {
             // Respawn baseado em frames
             if (frames % 200 === 0) {
                 spawnPipe();

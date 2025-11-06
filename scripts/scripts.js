@@ -1,4 +1,4 @@
-const State = { start: "START", play: "PLAY", end: "END" };
+const State = { start: "START", gameplay: "GAMEPLAY", end: "END" };
 let state = State.start; 
 
 const gravity = 0.5;
@@ -20,9 +20,8 @@ const btnIniciar = document.querySelector('.start');
 document.addEventListener('keydown', (event) => {
     switch (state, event.key) {
     case State.start && "Enter":
-        state = State.play;
-        run();
-    case State.play && " ":
+        gameplay();
+    case State.gameplay && " ":
         doFlap();
     case State.end:
         break;
@@ -30,16 +29,16 @@ document.addEventListener('keydown', (event) => {
 });
 
 //TODO: Não está funcionando bem
-document.addEventListener('pointerdown', () => {
-    switch (state) {
-    case State.start:
-        state = State.play;
-        run();
-    case State.play:
-        doFlap();
-    case State.end:
-        break;
-    }
-});
+// document.addEventListener('pointerdown', () => {
+//     switch (state) {
+//     case State.start:
+//         state = State.gameplay;
+//         gameplay();
+//     case State.gameplay:
+//         doFlap();
+//     case State.end:
+//         break;
+//     }
+// });
 
 window.addEventListener('load', () => start());

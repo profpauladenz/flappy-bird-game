@@ -1,4 +1,3 @@
-// Função para inicializar a tela de START
 function start() {
     state = State.start;
 
