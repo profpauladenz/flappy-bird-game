@@ -38,7 +38,7 @@ function run() {
             .querySelectorAll('.pipe_sprite')
             .forEach(pipe => {
                 const boxPipe = pipe.getBoundingClientRect();
-                const newX = boxPipe.left + speed;
+                const newX = boxPipe.left + gameSpeed;
 
                 if (newX < 0) {
                     pipe.remove();
