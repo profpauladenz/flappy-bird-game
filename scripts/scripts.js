@@ -18,15 +18,19 @@ const message = document.querySelector('.message');
 const btnIniciar = document.querySelector('.start');
 
 document.addEventListener('keydown', (event) => {
+    if (state === State.end) {
+        state = State.start;
+        start();
+        return;
+    }
+
     switch (state, event.key) {
-    case State.start && "Enter":
+    case (State.start, "Enter"):
+        state = State.gameplay;
         gameplay();
         break;
-    case State.gameplay && " ":
+    case (State.gameplay, " "):
         doFlap();
-        break;
-    case State.end:
-        start();
         break;
     default:
         break;
@@ -36,12 +40,14 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('pointerdown', () => {
     switch (state) {
     case State.start:
+        state = State.gameplay;
         gameplay();
         break;
     case State.gameplay:
         doFlap();
         break;
     case State.end:
+        state = State.start;
         start();
         break;
     default:

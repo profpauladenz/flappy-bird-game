@@ -1,5 +1,7 @@
 function start() {
-    state = State.start;
+    if (state !== State.start) {
+        return;
+    }
 
     document
     .querySelectorAll('.pipe_sprite, .pipe_img')
@@ -11,6 +13,8 @@ function start() {
 
     score = 0;
     frames = 0;
+    vy = 0;
+    vx = 0;
 
     message.innerHTML = 'Press Enter To Start Game';
 }

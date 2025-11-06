@@ -1,8 +1,15 @@
 function gameplay() {
-    state = State.gameplay;
+    if (state !== State.gameplay) {
+        return;
+    }
+
     message.innerHTML = '';
 
     function loop() {
+        if (state != State.gameplay) {
+            return;
+        }
+
         update();
         render();
         requestAnimationFrame(loop);
@@ -10,10 +17,6 @@ function gameplay() {
     requestAnimationFrame(loop);
 
     function update() {
-        if (state != State.gameplay) {
-            return;
-        }
-
         frames++;
 
         vy+=gravity;
@@ -23,13 +26,18 @@ function gameplay() {
 
         let proposal = box.top + vy;
 
-        if (proposal < topEdge) {
-            proposal = topEdge;
-            vy = 0;
-        } else if (proposal > lowerEdge) {
-            proposal = lowerEdge;
-            vy = 0;
-        } 
+        if (proposal < topEdge || proposal > lowerEdge) {
+            state = State.end;
+            end();
+        }
+
+        // if (proposal < topEdge) {
+        //     proposal = topEdge;
+        //     vy = 0;
+        // } else if (proposal > lowerEdge) {
+        //     proposal = lowerEdge;
+        //     vy = 0;
+        // } 
         
         bird.style.top = `${Math.round(proposal + vy)}px`;
 
@@ -50,11 +58,9 @@ function gameplay() {
     }
 
     function render() {
-        if (state == State.gameplay) {
-            // Respawn baseado em frames
-            if (frames % 200 === 0) {
-                spawnPipe();
-            }
+        // Respawn baseado em frames
+        if (frames % 200 === 0) {
+            spawnPipe();
         }
     }
 }
