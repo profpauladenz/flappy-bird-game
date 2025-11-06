@@ -29,6 +29,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+//TODO: Não está funcionando bem
 document.addEventListener('pointerdown', () => {
     switch (state) {
     case State.start:
