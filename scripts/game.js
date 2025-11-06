@@ -14,40 +14,43 @@ function run() {
     requestAnimationFrame(loop);
 
     function update() {
-        if (state == State.play) {
-            frames++;
-
-            vy+=gravity;
-            const box = bird.getBoundingClientRect();
-            const topEdge = 0;
-            const lowerEdge = window.innerHeight - box.height;
-
-            let proposal = box.top + vy;
-
-            if (proposal < topEdge) {
-                proposal = topEdge;
-                vy = 0;
-            } else if (proposal > lowerEdge) {
-                proposal = lowerEdge;
-                vy = 0;
-            } 
-            
-            bird.style.top = `${Math.round(proposal + vy)}px`;
-
-            document
-            .querySelectorAll('.pipe_sprite')
-            .forEach(pipe => {
-                const boxPipe = pipe.getBoundingClientRect();
-                const newX = boxPipe.left + gameSpeed;
-
-                if (newX < 0) {
-                    pipe.remove();
-                    console.log("removed");
-                } else {
-                    pipe.style.left = `${newX}px`;
-                }
-            });
+        if (state != State.play) {
+            return;
         }
+
+        frames++;
+
+        vy+=gravity;
+        const box = bird.getBoundingClientRect();
+        const topEdge = 0;
+        const lowerEdge = window.innerHeight - box.height;
+
+        let proposal = box.top + vy;
+
+        if (proposal < topEdge) {
+            proposal = topEdge;
+            vy = 0;
+        } else if (proposal > lowerEdge) {
+            proposal = lowerEdge;
+            vy = 0;
+        } 
+        
+        bird.style.top = `${Math.round(proposal + vy)}px`;
+
+        document
+        .querySelectorAll('.pipe_sprite')
+        .forEach(pipe => {
+            const boxPipe = pipe.getBoundingClientRect();
+            const newX = boxPipe.left + gameSpeed;
+
+            if (newX < 0) {
+                pipe.remove();
+                console.log("removed");
+            } else {
+                pipe.style.left = `${newX}px`;
+            }
+        });
+        
     }
 
     function render() {
