@@ -4,6 +4,7 @@ let state = State.start;
 const gravity = 0.5;
 const flap = -8; 
 const gameSpeed = -0.5;
+const pipeWidth = 50;
 
 let score = 0;
 let best = 0; //TODO: Adicionar lógica

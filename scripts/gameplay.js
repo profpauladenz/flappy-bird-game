@@ -30,14 +30,6 @@ function gameplay() {
             state = State.end;
             end();
         }
-
-        // if (proposal < topEdge) {
-        //     proposal = topEdge;
-        //     vy = 0;
-        // } else if (proposal > lowerEdge) {
-        //     proposal = lowerEdge;
-        //     vy = 0;
-        // } 
         
         bird.style.top = `${Math.round(proposal + vy)}px`;
 
@@ -46,6 +38,11 @@ function gameplay() {
         .forEach(pipe => {
             const boxPipe = pipe.getBoundingClientRect();
             const newX = boxPipe.left + gameSpeed;
+
+            if (isColliding(box, boxPipe)) {
+                state = State.end;
+                end();
+            }
 
             if (newX < 0) {
                 pipe.remove();
@@ -73,8 +70,7 @@ function spawnPipe() {
     const box = document.createElement('div');
     box.className = 'pipe_sprite';
 
-    // box.style.left = `99vw`;
-    box.style.left = `50vw`;
+    box.style.left = `${pipeWidth}vw`;
     box.style.top = `${randomSpawnPoint()}vh`;
 
     const sprite = document.createElement('img');
@@ -87,4 +83,19 @@ function spawnPipe() {
 
 function randomSpawnPoint() {
     return Math.floor(Math.random() * 100);
+}
+
+function isColliding(birdBox, pipeBox) {
+    const birdRight = birdBox.left + birdBox.width;
+    const pipeRight = pipeBox.left + pipeBox.width;
+    const birdBottom = birdBox.top + birdBox.height;
+
+    if (
+        birdRight >= pipeBox.left &&
+        pipeRight >= birdBox.left &&
+        birdBottom >= pipeBox.top
+    ) {
+        console.log("Collision!");
+        return true;
+    }
 }
